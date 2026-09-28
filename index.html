@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NKTravels - Book Your Ride</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f5f6fa;
+            color: #222;
+        }
+
+        /* Header / Navbar */
+        header {
+            background: #111827;
+            color: white;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: #f59e0b;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #f59e0b;
+        }
+
+        .btn-login {
+            background: #f59e0b;
+            padding: 8px 18px;
+            border-radius: 20px;
+            color: #111827 !important;
+            font-weight: bold;
+        }
+
+        .btn-login:hover {
+            background: #d97706;
+            color: white !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 520px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+                        url('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 35px;
+            opacity: 0.95;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+        }
+
+        /* Booking Box */
+        .booking-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            color: #222;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .booking-box input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .booking-box input:focus {
+            border-color: #f59e0b;
+        }
+
+        .search-btn {
+            grid-column: 1 / -1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #f59e0b;
+            color: #111827;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search-btn:hover {
+            background: #d97706;
+            color: white;
+        }
+
+        /* Car Section */
+        .cars {
+            padding: 70px 8%;
+            text-align: center;
+        }
+
+        .cars h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #111827;
+        }
+
+        .car-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .car-card {
+            width: 350px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .car-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #e2e8f0;
+        }
+
+        .car-info {
+            padding: 25px;
+        }
+
+        .car-info h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: #111827;
+        }
+
+        .car-info p {
+            color: #666;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #f59e0b;
+            margin-top: 12px;
+        }
+
+        .book-btn {
+            width: 100%;
+            margin-top: 18px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #111827;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .book-btn:hover {
+            background: #374151;
+        }
+
+        /* Reviews Section */
+        .reviews {
+            background: #ffffff;
+            padding: 70px 8%;
+            text-align: center;
+        }
+
+        .reviews h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #111827;
+        }
+
+        .reviews-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .review-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            width: 320px;
+            text-align: left;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .review-card .stars {
+            color: #f59e0b;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .review-card p {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .review-card h4 {
+            font-size: 16px;
+            color: #111827;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #fff;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 32px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: #111827;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .submit-booking-btn {
+            width: 100%;
+            padding: 12px;
+            background: #25D366;
+            border: none;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .submit-booking-btn:hover {
+            background: #1ebd56;
+        }
+
+        @media (max-width: 800px) {
+            header {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 10px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .booking-box {
+                grid-template-columns: 1fr;
+            }
+
+            .car-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            🚖 NK<span>Travels</span>
+        </div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#cars">Cars</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#booking">Booking</a>
+            <a href="#" class="btn-login">Login</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Travel With Comfort</h1>
+            <p>Your journey, our responsibility.</p>
+
+            <div class="booking-box" id="booking">
+                <input type="text" id="heroPickup" placeholder="📍 Pickup Location">
+                <input type="text" id="heroDrop" placeholder="📍 Drop Location">
+                <input type="date" id="heroDate">
+                <button class="search-btn" onclick="openBookingModal()">Book Available Ride</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Car List Section -->
+    <section class="cars" id="cars">
+        <h2>Our Fleet</h2>
+
+        <div class="car-container">
+            <!-- Sedan -->
+            <div class="car-card">
+                <img src="dzire.avif" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80';" alt="Maruti Suzuki Dzire Tour S">
+                <div class="car-info">
+                    <h3>Maruti Suzuki Dzire</h3>
+                    <p>Commercial Sedan (Tour S)</p>
+                    <p>AC • 4 Seats • Clean & Comfortable</p>
+                    <div class="price">₹15 / km</div>
+                    <button class="book-btn" onclick="openBookingModal('Maruti Suzuki Dzire Tour S')">Book Now</button>
+                </div>
+            </div>
+
+            <!-- SUV - Ertiga -->
+            <div class="car-card">
+                <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80" alt="Maruti Ertiga">
+                <div class="car-info">
+                    <h3>Maruti Ertiga</h3>
+                    <p>Family MPV / SUV</p>
+                    <p>AC • 6+1 Seats • Extra Luggage Space</p>
+                    <div class="price">₹18 / km</div>
+                    <button class="book-btn" onclick="openBookingModal('Maruti Ertiga')">Book Now</button>
+                </div>
+            </div>
+
+            <!-- Luxury SUV - Innova -->
+            <div class="car-card">
+                <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80" alt="Toyota Innova Crysta">
+                <div class="car-info">
+                    <h3>Toyota Innova Crysta</h3>
+                    <p>Premium Luxury Tourer</p>
+                    <p>AC • 7 Seats • Captain Seats & Comfort</p>
+                    <div class="price">₹22 / km</div>
+                    <button class="book-btn" onclick="openBookingModal('Toyota Innova Crysta')">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section class="reviews" id="reviews">
+        <h2>Customer Reviews</h2>
+        <div class="reviews-container">
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Very punctual service and polite driver. The Dzire Tour S was super clean. Highly recommended!"</p>
+                <h4>- Karthik R.</h4>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Booked Ertiga for an outstation family trip. Excellent comfort and reasonable per-km charges."</p>
+                <h4>- Suresh Kumar</h4>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Quick WhatsApp response and hassle-free booking experience with NKTravels."</p>
+                <h4>- Priya M.</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/917010988744?text=Hi%20NKTravels,%20I%20have%20a%20booking%20query." class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        💬
+    </a>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Complete Your Booking</h2>
+            <form id="bookingForm" onsubmit="handleWhatsAppBooking(event)">
+                <input type="hidden" id="selectedCar" value="Maruti Suzuki Dzire Tour S">
+                <input type="text" id="custName" placeholder="Your Name" required>
+                <input type="tel" id="custPhone" placeholder="Phone Number" required>
+                <input type="text" id="pickup" placeholder="Pickup Location" required>
+                <input type="text" id="drop" placeholder="Drop Location" required>
+                <input type="date" id="bookDate" required>
+                <button type="submit" class="submit-booking-btn">📱 Book via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 NKTravels. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function openBookingModal(carName = 'Maruti Suzuki Dzire Tour S') {
+            const hPickup = document.getElementById('heroPickup').value;
+            const hDrop = document.getElementById('heroDrop').value;
+            const hDate = document.getElementById('heroDate').value;
+
+            if(hPickup) document.getElementById('pickup').value = hPickup;
+            if(hDrop) document.getElementById('drop').value = hDrop;
+            if(hDate) document.getElementById('bookDate').value = hDate;
+
+            document.getElementById('selectedCar').value = carName;
+            document.getElementById('bookingModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+        }
+
+        function handleWhatsAppBooking(event) {
+            event.preventDefault();
+
+            const ownerPhoneNumber = "917010988744"; 
+
+            const car = document.getElementById('selectedCar').value;
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const pickup = document.getElementById('pickup').value;
+            const drop = document.getElementById('drop').value;
+            const date = document.getElementById('bookDate').value;
+
+            const cleanText = `Booking Request for NKTravels - Car: ${car} | Name: ${name} | Phone: ${phone} | Pickup: ${pickup} | Drop: ${drop} | Date: ${date}`;
+
+            const whatsappUrl = `https://wa.me/${ownerPhoneNumber}?text=${encodeURIComponent(cleanText)}`;
+            window.open(whatsappUrl, '_blank');
+
+            closeModal();
+        }
+    </script>
+
+</body>
+</html>
